@@ -5,7 +5,8 @@ const schedulingSchema = new Schema({
     date: Number,
     time: Number,
     userName: String,
-}, {timestamps: true});
+    userEmail: String,
+}, {timestamps: { createdAt: true, updatedAt: false }});
 
 const Scheduling = mongoose.model('Scheduling', schedulingSchema);
 

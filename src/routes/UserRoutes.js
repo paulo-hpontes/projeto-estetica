@@ -7,9 +7,10 @@ const {
   getCurrentUser,
   getUserById,
 } = require("../controllers/UserController");
-const authUser = require("../middlewares/authUser");
+
 
 // Middlewares
+const authUser = require("../middlewares/authUser");
 const validate = require("../middlewares/handleValidation");
 const {
   userCreateValidate,
