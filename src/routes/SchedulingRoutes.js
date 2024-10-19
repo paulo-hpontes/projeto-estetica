@@ -1,16 +1,22 @@
 const router = require("express").Router();
 
-// controller
-const {newScheduling, deleteScheduling} = require('../controllers/SchedulingController');
+// Scheduling Controller
+const {
+  newScheduling,
+  deleteScheduling,
+  getAllScheduling,
+  getSchedulingById,
+} = require("../controllers/SchedulingController");
 
-// middleware
-const {schedulingValidation} = require('../middlewares/schedulingValidation');
+// Scheduling Middleware
+const { schedulingValidation } = require("../middlewares/schedulingValidation");
 const authUser = require("../middlewares/authUser");
 const validate = require("../middlewares/handleValidation");
 
-
-// Routes
-router.post('/', authUser, schedulingValidation(), validate, newScheduling);
-router.delete('/:id', authUser, deleteScheduling);
+// Scheduling Routes
+router.post("/", authUser, schedulingValidation(), validate, newScheduling);
+router.delete("/:id", authUser, deleteScheduling);
+router.get('/', getAllScheduling);
+router.get('/:id', getSchedulingById);
 
 module.exports = router;

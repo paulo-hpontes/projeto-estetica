@@ -82,9 +82,49 @@ const getUserById = async (req, res) => {
   }
 };
 
+const updateAdminUser = async (req, res) => {
+  const {id} = req.params;
+  const reqUser = req.user;
+
+  try{
+    const verifyUser = await User.findById(reqUser._id);
+    const user = await User.findById(id);
+
+    if(!verifyUser.admin){
+      return res.status(422).json({
+        errors: [
+          "Você precisa de autorização para esta tarefa!",
+        ],
+      });
+    }
+    
+    if(!user){
+      return res.status(422).json({
+        errors: [
+          "Usuário não encontrado!",
+        ],
+      });
+    }
+
+    if(user.admin === false){
+      user.admin = true;
+    }else{
+      user.admin = false;
+    }
+    await user.save();
+    return res.status(200).json({message: 'Administrador atualizada com sucesso!'});
+  }catch(e){
+    console.log(e);
+    return res.status(400).json({
+      errors: ["Houve um erro inesperado, por favor tente mais tarde"],
+    });
+  }
+}
+
 module.exports = {
   register,
   login,
   getCurrentUser,
   getUserById,
+  updateAdminUser
 };

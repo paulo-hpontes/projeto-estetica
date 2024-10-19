@@ -6,6 +6,7 @@ const {
   login,
   getCurrentUser,
   getUserById,
+  updateAdminUser
 } = require("../controllers/UserController");
 
 
@@ -20,6 +21,7 @@ const {
 // Routes
 router.post("/register", userCreateValidate(), validate, register);
 router.post("/login", loginValidate(), validate, login);
+router.put("/:id", authUser, updateAdminUser);
 router.get("/profile", authUser, getCurrentUser);
 router.get("/:id", getUserById);
 

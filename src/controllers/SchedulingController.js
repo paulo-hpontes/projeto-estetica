@@ -58,10 +58,39 @@ const deleteScheduling = async (req, res) => {
 };
 
 const getAllScheduling = async (req, res) => {
-  
-}
+  try {
+    const scheduling = await Scheduling.find()
+      .sort([["createdAt", -1]])
+      .exec();
+
+    return res.status(200).json(scheduling);
+  } catch (e) {
+    console.log(e);
+    return res.status(422).json({
+      errors: [
+        "Ocorreu um erro inesperado, por favor tente novamente mais tarde!",
+      ],
+    });
+  }
+};
+
+const getSchedulingById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const scheduling = await Scheduling.findById(id);
+    return res.status(200).json(scheduling);
+  } catch (e) {
+    console.log(e);
+    return res.status(422).json({
+      errors: ["Agendamento não encontrado!"],
+    });
+  }
+};
 
 module.exports = {
   newScheduling,
   deleteScheduling,
+  getAllScheduling,
+  getSchedulingById
 };
