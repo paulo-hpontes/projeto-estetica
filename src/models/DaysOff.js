@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const daysOffSchema = new Schema({
-    day: Date,
+    date: Date,
     adminEmail: String,
 }, {timestamps: true});
 

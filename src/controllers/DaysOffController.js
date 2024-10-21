@@ -13,14 +13,15 @@ const newDayOff = async (req, res) => {
         .json({ message: ["Você precisa de autorização para esta tarefa!"] });
     }
 
-    await DaysOff.create({
+    console.log(date);
+    const newDay = await DaysOff.create({
       date,
-      userEmail: reqUser.email,
+      adminEmail: reqUser.email,
     });
 
     return res
       .status(200)
-      .json({ message: ["Data ficará indisponível para agendamento"] });
+      .json({newDay, message: ["Data ficará indisponível para agendamento"] });
   } catch (e) {
     console.log(e);
     return res.status(422).json({
