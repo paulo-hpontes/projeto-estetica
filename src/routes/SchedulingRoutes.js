@@ -8,7 +8,7 @@ const {
   getSchedulingById,
 } = require("../controllers/SchedulingController");
 
-// Scheduling Middleware
+// Scheduling Middlewares
 const { schedulingValidation } = require("../middlewares/schedulingValidation");
 const authUser = require("../middlewares/authUser");
 const validate = require("../middlewares/handleValidation");

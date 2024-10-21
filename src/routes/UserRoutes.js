@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-// controller
+// User Controller
 const {
   register,
   login,
@@ -10,7 +10,7 @@ const {
 } = require("../controllers/UserController");
 
 
-// Middlewares
+// User Middlewares
 const authUser = require("../middlewares/authUser");
 const validate = require("../middlewares/handleValidation");
 const {
@@ -18,7 +18,7 @@ const {
   loginValidate,
 } = require("../middlewares/userValidations");
 
-// Routes
+// User Routes
 router.post("/register", userCreateValidate(), validate, register);
 router.post("/login", loginValidate(), validate, login);
 router.put("/:id", authUser, updateAdminUser);

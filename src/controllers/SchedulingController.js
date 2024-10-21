@@ -12,7 +12,7 @@ const newScheduling = async (req, res) => {
 
     if (!user) {
       return res.status(422).json({
-        errors: ["Houve um erro inesperado, por favor tente mais tarde"],
+        errors: ['É necessário fazer login para marcar um agendamento!'],
       });
     }
 
@@ -38,7 +38,7 @@ const deleteScheduling = async (req, res) => {
   const { id } = req.params;
 
   try {
-    let scheduling = await Scheduling.findById(id);
+    const scheduling = await Scheduling.findById(id);
 
     if (!scheduling) {
       res.status(422).json({ errors: ["Horário não existe!"] });
@@ -68,7 +68,7 @@ const getAllScheduling = async (req, res) => {
     console.log(e);
     return res.status(422).json({
       errors: [
-        "Ocorreu um erro inesperado, por favor tente novamente mais tarde!",
+        "Houve um erro inesperado, por favor tente novamente mais tarde!",
       ],
     });
   }
