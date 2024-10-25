@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // Solve cors
-app.use(cors({credentials: true, origin:`http://localhost:${portFrontEnd}`}));
+app.use(cors({credentials: true, origin:`http://localhost:5173`}));
 
 // database
 require('./src/config/db');

@@ -88,7 +88,6 @@ const getAllService = async (req, res) => {
     const services = await Service.find()
       .sort([["createdAt", -1]])
       .exec();
-    console.log(services);
     return res.status(200).json(services);
   } catch (e) {
     console.log(e);
@@ -102,7 +101,6 @@ const getServiceById = async (req, res) => {
   const {id} = req.params;
   try {
     const services = await Service.findById(id);
-    console.log(services)
     return res.status(200).json(services);
   } catch (e) {
     console.log(e);
