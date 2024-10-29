@@ -24,9 +24,9 @@ const newDayOff = async (req, res) => {
       .json({newDay, message: ["Data ficará indisponível para agendamento"] });
   } catch (e) {
     console.log(e);
-    return res.status(422).json({
+    return res.stauts(422).json({
       errors: [
-        "Houve um erro inesperado, por favor tente novamente mais tarde!",
+        { message: ["Houve um erro inesperado, por favor tente mais tarde!"] },
       ],
     });
   }
@@ -55,9 +55,9 @@ const removeDaysOff = async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    return res.status(422).json({
+    return res.stauts(422).json({
       errors: [
-        "Houve um erro inesperado, por favor tente novamente mais tarde!",
+        { message: ["Houve um erro inesperado, por favor tente mais tarde!"] },
       ],
     });
   }
@@ -71,9 +71,9 @@ const getAllDaysOff = async (req, res) => {
     return res.status(200).json(daysOff);
   } catch (e) {
     console.log(e);
-    return res.status(422).json({
+    return res.stauts(422).json({
       errors: [
-        "Houve um erro inesperado, por favor tente novamente mais tarde!",
+        { message: ["Houve um erro inesperado, por favor tente mais tarde!"] },
       ],
     });
   }

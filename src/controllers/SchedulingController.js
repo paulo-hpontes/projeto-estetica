@@ -12,7 +12,9 @@ const newScheduling = async (req, res) => {
 
     if (!user) {
       return res.status(422).json({
-        errors: ['É necessário fazer login para marcar um agendamento!'],
+        errors: [
+          { message: ["É necessário fazer login para marcar um agendamento!"] },
+        ],
       });
     }
 
@@ -28,8 +30,10 @@ const newScheduling = async (req, res) => {
       .json({ newScheduling, message: "Horário agendado com sucesso!" });
   } catch (e) {
     console.log(e);
-    return res.status(400).json({
-      errors: ["Houve um erro inesperado, por favor tente mais tarde"],
+    return res.stauts(422).json({
+      errors: [
+        { message: ["Houve um erro inesperado, por favor tente mais tarde!"] },
+      ],
     });
   }
 };
@@ -41,7 +45,9 @@ const deleteScheduling = async (req, res) => {
     const scheduling = await Scheduling.findById(id);
 
     if (!scheduling) {
-      res.status(422).json({ errors: ["Horário não existe!"] });
+      res
+        .status(422)
+        .json({ errors: [{ message: ["Agendamento não encontrado"] }] });
       return;
     }
 
@@ -51,8 +57,10 @@ const deleteScheduling = async (req, res) => {
       .json({ message: "Agendamento excluído com sucesso!" });
   } catch (e) {
     console.log(e);
-    return res.status(400).json({
-      errors: ["Houve um erro inesperado, por favor tente mais tarde"],
+    return res.stauts(422).json({
+      errors: [
+        { message: ["Houve um erro inesperado, por favor tente mais tarde!"] },
+      ],
     });
   }
 };
@@ -66,9 +74,9 @@ const getAllScheduling = async (req, res) => {
     return res.status(200).json(scheduling);
   } catch (e) {
     console.log(e);
-    return res.status(422).json({
+    return res.stauts(422).json({
       errors: [
-        "Houve um erro inesperado, por favor tente novamente mais tarde!",
+        { message: ["Houve um erro inesperado, por favor tente mais tarde!"] },
       ],
     });
   }
@@ -83,7 +91,7 @@ const getSchedulingById = async (req, res) => {
   } catch (e) {
     console.log(e);
     return res.status(422).json({
-      errors: ["Agendamento não encontrado!"],
+      errors: [{ message: ["Agendamento não encontrado!"] }],
     });
   }
 };
@@ -92,5 +100,5 @@ module.exports = {
   newScheduling,
   deleteScheduling,
   getAllScheduling,
-  getSchedulingById
+  getSchedulingById,
 };

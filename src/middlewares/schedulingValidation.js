@@ -4,11 +4,11 @@ const schedulingValidation = () => {
   return [
     body("date")
       .isNumeric()
-      .withMessage("Escolha uma data"),
+      .withMessage({message:["Escolha uma data"]}),
 
     body("time")
       .isNumeric()
-      .withMessage("Escolha um horário"),
+      .withMessage({message:["Escolha um horário"]}),
   ];
 };
 
