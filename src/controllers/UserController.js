@@ -109,7 +109,7 @@ const updateAdminUser = async (req, res) => {
           { message: ["Você precisa de autorização para esta tarefa!"] },
         ],
       });
-    }
+    } 
 
     if (!user) {
       return res.status(422).json({
@@ -125,7 +125,7 @@ const updateAdminUser = async (req, res) => {
     await user.save();
     return res
       .status(200)
-      .json({ message: "Administrador atualizada com sucesso!" });
+      .json({ message: "Administrador atualizado com sucesso!" });
   } catch (e) {
     console.log(e);
     return res.status(400).json({

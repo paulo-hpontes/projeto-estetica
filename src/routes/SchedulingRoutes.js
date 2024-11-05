@@ -14,9 +14,9 @@ const authUser = require("../middlewares/authUser");
 const validate = require("../middlewares/handleValidation");
 
 // Scheduling Routes
-router.post("/", authUser, schedulingValidation(), validate, newScheduling);
+router.post("/", schedulingValidation(), validate, authUser, newScheduling);
 router.delete("/:id", authUser, deleteScheduling);
 router.get('/', getAllScheduling);
-router.get('/:id', getSchedulingById);
+router.get('/:id', authUser, getSchedulingById);
 
 module.exports = router;

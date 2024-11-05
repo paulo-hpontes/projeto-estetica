@@ -5,6 +5,7 @@ const servicetSchema = new Schema({
     serviceType: String,
     serviceName: String,
     serviceValue: Number,
+    time: Number,
     userName: String
 }, {timestamps: { createdAt: true, updatedAt: true }});
 

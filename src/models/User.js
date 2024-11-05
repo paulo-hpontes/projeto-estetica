@@ -7,7 +7,7 @@ const userSchema = new Schema({
     password: String,
     admin: {
         type: Boolean,
-        default: true
+        default: false
     }
 }, {timestamps: true});
 

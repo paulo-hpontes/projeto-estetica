@@ -2,7 +2,7 @@ const Service = require("../models/Services");
 const User = require("../models/User");
 
 const newService = async (req, res) => {
-  const { serviceType, serviceName, serviceValue } = req.body;
+  const { serviceType, serviceName, serviceValue, time } = req.body;
   const reqUser = req.user._id;
 
   try {
@@ -16,6 +16,7 @@ const newService = async (req, res) => {
       serviceType,
       serviceName,
       serviceValue,
+      time,
       userName: user.name,
     });
     return res
@@ -36,7 +37,8 @@ const deleteService = async (req, res) => {
   const reqUser = req.user._id;
 
   try {
-    const service = await Service.findById(id);
+    let service = null; 
+    service = await Service.findById(id);
     if (!service) {
       return res
         .status(404)
