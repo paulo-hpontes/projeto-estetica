@@ -37,8 +37,7 @@ const deleteService = async (req, res) => {
   const reqUser = req.user._id;
 
   try {
-    let service = null; 
-    service = await Service.findById(id);
+    const service = await Service.findById(id);
     if (!service) {
       return res
         .status(404)
@@ -51,7 +50,7 @@ const deleteService = async (req, res) => {
         .status(401)
         .json({ errors: [{ message: ["Usuário não autorizado!"] }] });
     }
-
+    
     await Service.deleteOne(service);
     return res
       .status(200)
@@ -78,7 +77,6 @@ const updateService = async (req, res) => {
         .status(404)
         .json({ errors: [{ message: ["Serviço não encontrado!"] }] });
     }
-
     const user = await User.findById(reqUser);
     if (!user || !user.admin) {
       return res

@@ -1,5 +1,6 @@
 const DaysOff = require("../models/DaysOff");
 const User = require("../models/User");
+const moment = require("moment");
 
 const newDayOff = async (req, res) => {
   const { date } = req.body;
@@ -13,15 +14,15 @@ const newDayOff = async (req, res) => {
         .json({ message: ["Você precisa de autorização para esta tarefa!"] });
     }
 
-    console.log(date);
     const newDay = await DaysOff.create({
       date,
       adminEmail: reqUser.email,
     });
 
-    return res
-      .status(200)
-      .json({newDay, message: ["Data ficará indisponível para agendamento"] });
+    return res.status(200).json({
+      data: newDay,
+      message: ["Data ficará indisponível para agendamento"],
+    });
   } catch (e) {
     console.log(e);
     return res.stauts(422).json({
@@ -38,24 +39,28 @@ const removeDaysOff = async (req, res) => {
 
   try {
     const user = await User.findById(reqUser._id);
-    if (!user.admin) {
+    if (!user || !user.admin) {
       return res
         .status(401)
         .json({ message: ["Você precisa de autorização para esta tarefa!"] });
     }
 
-    const daysOff = DaysOff.findById(id);
-    if (!daysOff) {
+    const day = await DaysOff.findById(id);
+    if (!day) {
       return res.status(422).json({ errors: ["Data inexistente"] });
     }
-
-    await DaysOff.deleteOne(daysOff);
+    await DaysOff.deleteOne(day);
     return res.status(200).json({
-      message: ["Agora agendamento está disponível para este dia!"],
+      data: day,
+      message: [
+        `Agora agendamento para o dia: ${moment(day.date).format(
+          "DD-MM-YYYY"
+        )} está disponível`,
+      ],
     });
   } catch (e) {
     console.log(e);
-    return res.stauts(422).json({
+    return res.status(422).json({
       errors: [
         { message: ["Houve um erro inesperado, por favor tente mais tarde!"] },
       ],
@@ -82,5 +87,5 @@ const getAllDaysOff = async (req, res) => {
 module.exports = {
   newDayOff,
   removeDaysOff,
-  getAllDaysOff
+  getAllDaysOff,
 };
