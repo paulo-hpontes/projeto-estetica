@@ -1,13 +1,12 @@
 const DaysOff = require("../models/DaysOff");
-const User = require("../models/User");
 const moment = require("moment");
 
 const newDayOff = async (req, res) => {
   const { date } = req.body;
-  const reqUser = req.user;
+  const user = req.user;
 
   try {
-    const user = await User.findById(reqUser._id);
+
     if (!user.admin) {
       return res
         .status(401)
@@ -25,7 +24,7 @@ const newDayOff = async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    return res.stauts(422).json({
+    return res.status(422).json({
       errors: [
         { message: ["Houve um erro inesperado, por favor tente mais tarde!"] },
       ],
@@ -35,10 +34,10 @@ const newDayOff = async (req, res) => {
 
 const removeDaysOff = async (req, res) => {
   const { id } = req.params;
-  const reqUser = req.user;
+  const user = req.user;
 
   try {
-    const user = await User.findById(reqUser._id);
+
     if (!user || !user.admin) {
       return res
         .status(401)
@@ -76,7 +75,7 @@ const getAllDaysOff = async (req, res) => {
     return res.status(200).json(daysOff);
   } catch (e) {
     console.log(e);
-    return res.stauts(422).json({
+    return res.status(422).json({
       errors: [
         { message: ["Houve um erro inesperado, por favor tente mais tarde!"] },
       ],

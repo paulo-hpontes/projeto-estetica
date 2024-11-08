@@ -1,12 +1,11 @@
 const Service = require("../models/Services");
-const User = require("../models/User");
 
 const newService = async (req, res) => {
   const { serviceType, serviceName, serviceValue, time } = req.body;
-  const reqUser = req.user._id;
+  const user = req.user;
 
   try {
-    const user = await User.findById(reqUser);
+
     if (!user || !user.admin) {
       return res
         .status(401)
@@ -34,7 +33,7 @@ const newService = async (req, res) => {
 
 const deleteService = async (req, res) => {
   const { id } = req.params;
-  const reqUser = req.user._id;
+  const user = req.user;
 
   try {
     const service = await Service.findById(id);
@@ -44,7 +43,7 @@ const deleteService = async (req, res) => {
         .json({ errors: [{ message: ["Serviço não encontrado!"] }] });
     }
 
-    const user = await User.findById(reqUser);
+
     if (!user || !user.admin) {
       return res
         .status(401)
@@ -67,7 +66,7 @@ const deleteService = async (req, res) => {
 
 const updateService = async (req, res) => {
   const { id } = req.params;
-  const reqUser = req.user._id;
+  const user = req.user;
   const { serviceName, serviceValue } = req.body;
 
   try {
@@ -77,7 +76,7 @@ const updateService = async (req, res) => {
         .status(404)
         .json({ errors: [{ message: ["Serviço não encontrado!"] }] });
     }
-    const user = await User.findById(reqUser);
+
     if (!user || !user.admin) {
       return res
         .status(401)
