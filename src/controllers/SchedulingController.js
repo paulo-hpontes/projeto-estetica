@@ -1,21 +1,11 @@
 const Scheduling = require("../models/Scheduling");
-const User = require("../models/User");
 const moment = require('moment');
 
 const newScheduling = async (req, res) => {
   const { title, start, end, service, userEmail } = req.body;
-  const userId = req.user._id;
+  const user = req.user;
 
   try {
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(422).json({
-        errors: [
-          { message: ["É necessário fazer login para marcar um agendamento!"] },
-        ],
-      });
-    }
 
     const scheduling = await Scheduling.find();
     if (scheduling) {
@@ -48,7 +38,7 @@ const newScheduling = async (req, res) => {
         typeService: service.type,
         nameService: service.name,
       },
-      userEmail,
+      userEmail: user.email,
     });
     return res
       .status(201)
