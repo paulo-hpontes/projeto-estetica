@@ -15,7 +15,7 @@ const newDayOff = async (req, res) => {
 
     const newDay = await DaysOff.create({
       date,
-      adminEmail: reqUser.email,
+      adminEmail: user.email,
     });
 
     return res.status(200).json({

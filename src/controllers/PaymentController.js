@@ -23,9 +23,9 @@ const payment = async (req, res) => {
       ],
       auto_return: "all",
       back_urls: {
-        success: "https://http://localhost:5173/",
-        failure: "https://http://localhost:5173/",
-        pending: "https://http://localhost:5173/",
+        success: "http://http://localhost:5173/success",
+        failure: "http://http://localhost:5173/failure",
+        pending: "http://http://localhost:5173/failure",
       },
     };
 
@@ -35,6 +35,7 @@ const payment = async (req, res) => {
       userEmail: userEmail,
       productId: id,
       paymentId: data.id,
+      paymentStatus: "pending",
     });
 
     return res.status(201).json(data.init_point);
@@ -87,9 +88,7 @@ const updatePayment = async (req, res) => {
   const { paymentStatus } = req.body;
 
   try {
-    console.log(id);
     const pay = await Payment.findById(id);
-    console.log(id);
     if (!pay) {
       return res
         .status(404)
