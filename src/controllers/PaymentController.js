@@ -23,9 +23,9 @@ const payment = async (req, res) => {
       ],
       auto_return: "all",
       back_urls: {
-        success: "http://http://localhost:5173/success",
-        failure: "http://http://localhost:5173/failure",
-        pending: "http://http://localhost:5173/failure",
+        success: "http://localhost:5173/success",
+        failure: "http://localhost:5173/failure",
+        pending: "http://localhost:5173/failure",
       },
     };
 
