@@ -3,23 +3,13 @@
   "builds": [
     {
       "src": "dist/bundle.js",
-      "use": "@vercel/node-build",
-      "config": {
-        "env": {
-          "CONNECTIONSTRING": "mongodb+srv://paulohteles16:Paulo150601@cluster0.pumwl.mongodb.net/RaniSite?retryWrites=true&w=majority&appName=Cluster0",
-          "JWT_SECRET": "TokenRaniLashDesigner2024",
-          "PAYMENT_ACESS_TOKEN": "APP_USR-2370672221631615-110711-ed13319ebf26680afa9d1039176482c4-2084400684",
-          "PORT": 8086
-        },
-        "port": 8086
-
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/server.js"
+      "dest": "./app.js"
     }
   ]
 }
