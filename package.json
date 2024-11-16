@@ -4,8 +4,8 @@
   "description": "Projeto prara criação de um site para um estúdio de estética",
   "main": "index.js",
   "scripts": {
-    "dist": "webpack",
-    "server": "nodemon ./app.js"
+    "build": "webpack --mode production",
+    "start": "node dist/bundle.js"  
   },
   "keywords": [],
   "author": "",
