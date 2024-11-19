@@ -2,14 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/bundle.js",
+      "src": "app.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "dist/bundle.js",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "./app.js"
+      "src": "/bundle.js",
+      "dest": "/dist/bundle.js"
+    },
+    {
+      "src": "/(.*)", 
+      "dest": "app.js"
     }
   ]
 }

@@ -7,20 +7,23 @@ const app =  express();
 const cors = require('cors');
 
 
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use('/bundle.js', express.static(path.join(__dirname, "dist" , "bundle.js")));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // Solve cors
 app.use(cors());    
-const port = 5173;
-app.use(cors({credentials: true, origin:`http://localhost:${port}`}));
 
-// database
+// database 
 require('./src/config/db');
 
 // Router
 const router = require('./src/routes/Router');
 app.use(router);
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Servidor iniciado na porta ${port}`);
+});
 
 module.exports = app;
