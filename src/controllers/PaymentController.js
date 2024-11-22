@@ -23,9 +23,9 @@ const payment = async (req, res) => {
       ],
       auto_return: "all",
       back_urls: {
-        success: "http://localhost:5173/success",
-        failure: "http://localhost:5173/failure",
-        pending: "http://localhost:5173/failure",
+        success: "https://www.rannilashdesigner.com.br/success",
+        failure: "https://www.rannilashdesigner.com.br/failure",
+        pending: "https://www.rannilashdesigner.com.br/failure",
       },
     };
 
@@ -108,9 +108,6 @@ const updatePayment = async (req, res) => {
     });
   }
 };
-
-// status=approved&
-// preference_id=2084400684-c61725a3-42c1-4b17-8713-e5630679f109&
 
 module.exports = {
   payment,
